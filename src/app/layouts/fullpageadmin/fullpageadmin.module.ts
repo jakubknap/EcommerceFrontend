@@ -5,11 +5,13 @@ import { RouterModule } from '@angular/router';
 import { FullpageadminComponent } from './fullpageadmin.component';
 import { AdminComponent } from '../../modules/admin/admin.component';
 import { MaterialModule } from '../../shared/material.module';
+import { AdminProductComponent } from '../../modules/admin/admin-product/admin-product.component';
 
 @NgModule({
   declarations: [
     FullpageadminComponent,
-    AdminComponent
+    AdminComponent,
+    AdminProductComponent
   ],
   imports: [
     CommonModule,
