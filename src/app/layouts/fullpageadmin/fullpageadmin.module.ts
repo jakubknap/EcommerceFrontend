@@ -11,6 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AdminProductAddComponent } from 'src/app/modules/admin/admin-product-add/admin-product-add.component';
 import { AdminProducFormComponent } from '../../modules/admin/admin-product-form/admin-product-form.component';
 import { AdminMessageComponent } from '../../modules/admin/admin-message/admin-message.component';
+import { AdminConfirmDialogComponent } from '../../modules/admin/admin-confirm-dialog/admin-confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { AdminMessageComponent } from '../../modules/admin/admin-message/admin-m
     AdminProductUpdateComponent,
     AdminProductAddComponent,
     AdminProducFormComponent,
-    AdminMessageComponent
+    AdminMessageComponent,
+    AdminConfirmDialogComponent
   ],
   imports: [
     CommonModule,

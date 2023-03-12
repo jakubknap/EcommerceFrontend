@@ -4,6 +4,8 @@ import { Page } from 'src/app/shared/model/page';
 import { AdminProductService } from './admin-product.service';
 import { AdminProduct } from './model/adminProduct';
 import { map, startWith, switchMap } from 'rxjs';
+import { AdminConfirmDialogService } from '../admin-confirm-dialog.service';
+import { MatTable } from '@angular/material/table';
 
 @Component({
   selector: 'app-admin-product',
@@ -11,13 +13,17 @@ import { map, startWith, switchMap } from 'rxjs';
   styleUrls: ['./admin-product.component.scss'],
 })
 export class AdminProductComponent implements AfterViewInit {
+  
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatTable) table!: MatTable<any>;
   displayedColumns: string[] = ['id', 'name', 'price','actions'];
   page!: Page<AdminProduct>;
   totalElements: number = 0;
   data: AdminProduct[] = [];
 
-  constructor(private adminProductService: AdminProductService) {}
+  constructor(
+    private adminProductService: AdminProductService,
+    private adminConfirmDialogService: AdminConfirmDialogService) {}
 
   ngAfterViewInit(): void {
     this.paginator.page
@@ -34,5 +40,22 @@ export class AdminProductComponent implements AfterViewInit {
         this.totalElements = data.totalElements;
         this.data = data.content;
       });
+  }
+
+  confirmDelete(element: AdminProduct){
+    this.adminConfirmDialogService.openConfirmDialog("Czy na pewno chcesz usunąć ten produkt?")
+    .afterClosed().subscribe(result => {
+      if (result) {
+        this.adminProductService.delete(element.id)
+        .subscribe(() => {
+          this.data.forEach((value, index) => {
+            if(element == value){
+              this.data.splice(index,1);
+              this.table.renderRows();
+            }
+          })
+        });
+      }
+    });
   }
 }

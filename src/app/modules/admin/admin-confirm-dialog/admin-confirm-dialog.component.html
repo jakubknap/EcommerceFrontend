@@ -1,0 +1,9 @@
+<div fxLayout="column" fxLayoutGap="30px" class="confirmDialog">
+    <div fxLayout="row">
+        <span fxFlex>{{data.message}}</span>
+    </div>
+    <div fxFlex fxLayoutGap="20px">
+        <button fxFlex mat-raised-button [mat-dialog-close]="false">Anuluj</button>
+        <button fxFlex mat-raised-button color="warn" [mat-dialog-close]="true">Potwierdź</button>
+    </div>
+</div>
